@@ -1,1 +1,1 @@
-web: gunicorn pythia.wsgi
+web: gunicorn api.wsgi
