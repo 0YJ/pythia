@@ -6,8 +6,8 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'pythia.views.home', name='home'),
-    url(r'^post/', 'pythia.views.post', name='post'),
+    url(r'^$', 'api.views.home', name='home'),
+    url(r'^post/', 'api.views.post', name='post'),
     # url(r'^$', 'pythia.views.home', name='home'),
     # url(r'^pythia/', include('pythia.foo.urls')),
 
