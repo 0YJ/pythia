@@ -1,5 +1,16 @@
 from django.http import HttpResponse
 from django.conf.urls import patterns, include, url
+import random
+import mathgutz
+import json
+# import os
+# import pickle
+import re
+import time
+from collections import defaultdict
+import numpy
+from nltk.classify.scikitlearn import SklearnClassifier
+from sklearn.linear_model import LogisticRegression
 
 def home(request):
     html = "<html><body>Howdy world.</body></html>"
@@ -34,20 +45,19 @@ def index(request):
     return "stuff"
 
 def debug(request):
-    return render(request, 'web/debug.html', {})
+    return render(request, 'api/debug.html', {})
 
 def debug_result(request):
     if 'q' in request.POST:
-        s = request.POST['q']
+        s = unicode(request.POST['q'])
     else:
-        s = ""
+        s = unicode("")
     try:
         t = json.loads(s)
     except ValueError:
         t = {}
     results = train_test_clf(t)
     return HttpResponse(json.dumps(results), content_type="application/json")
-
 
 def train_test_clf(input_hash) :
     corpus = input_hash.keys()
@@ -61,10 +71,10 @@ def train_test_clf(input_hash) :
         msgs_features[id] = {}
         # words = input_hash[id]["content"].split()
         # msgs_features[id]["features"] = dict([(word,1) for word in words if len(word) > 2 ])
-        words = preclassifier.happy_tokenize(input_hash[id]["content"])
-        msgs_features[id]["features"] = preclassifier.extract_features(words, "bow")
+        words = mathgutz.happy_tokenize(input_hash[id]["content"])
+        msgs_features[id]["features"] = mathgutz.extract_features(words, "bow")
         msgs_features[id]["label"] = input_hash[id]["label"]
-    train_data = [(msgs_features[id]["features"]) for id in train_cor]
+    train_data = [(msgs_features[id]["features"], msgs_features[id]["label"]) for id in train_cor]
     tval, cval = 1e-8, 13.0
     classifier = SklearnClassifier(LogisticRegression(tol=tval, penalty='l2', C=cval)).train(train_data)
     results = {}

@@ -8,6 +8,9 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'api.views.home', name='home'),
     url(r'^post/', 'api.views.post', name='post'),
+    url(r'^debug/', 'api.views.debug', name='debug'),
+    url(r'^debug_result/', 'api.views.debug_result', name='debug_result'),
+
     # url(r'^$', 'pythia.views.home', name='home'),
     # url(r'^pythia/', include('pythia.foo.urls')),
 

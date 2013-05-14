@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Is Our Classifiers Learning? {% endblock %}
+
+{% block content %}
+  <p><h1> Copy and past a JSON string of messages in the appropriate format;
+  half will be used for training a classifier, which will be tested on
+  the other half.
+  </h1></p>
+  <form action="/debug_result/" method="post">
+    {% csrf_token %}
+    <textarea name="q" rows=20 cols=100>
+    </textarea>
+    <input type="submit" value="SUBMIT">
+  </form>
+{% endblock %}
