@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+from django.conf.urls import patterns, include, url
 
 def home(request):
     html = "<html><body>Howdy world.</body></html>"
