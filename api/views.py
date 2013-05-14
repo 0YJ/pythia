@@ -46,7 +46,7 @@ def index(request):
     return "stuff"
 
 def debug(request):
-    return render(request, 'api/debug.html', {})
+    return render(request, 'debug.html', {})
 
 def debug_result(request):
     if 'q' in request.POST:
