@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.conf.urls import patterns, include, url
+from django.shortcuts import render, get_object_or_404
 import random
 import mathgutz
 import json
